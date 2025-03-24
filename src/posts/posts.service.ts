@@ -92,6 +92,12 @@ export class PostsService {
   public async getPostLikesCount(postId: string) {
     const post = await this.findById(postId);
 
-    return this.postsLikesRepository.getPostLikesCount(post.id);
+    const likesCount = await this.postsLikesRepository.getPostLikesCount(
+      post.id,
+    );
+
+    console.log(likesCount);
+
+    return likesCount;
   }
 }

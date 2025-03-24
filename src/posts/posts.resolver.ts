@@ -48,4 +48,9 @@ export class PostsResolver {
   public async getUserLikes(@Args('userId') userId: string) {
     return this.postsService.getUserLikes(userId);
   }
+
+  @Query(() => Number, { name: 'getPostLikesCount' })
+  public async getPostLikesCount(@Args('postId') postId: string) {
+    return this.postsService.getPostLikesCount(postId);
+  }
 }

@@ -79,6 +79,7 @@ type Query {
   findPostById(id: String!): Post!
   findPosts: [Post!]!
   getPostLikes(postId: String!): [Like!]!
+  getPostLikesCount(postId: String!): Int!
   getUserLikes(userId: String!): [Like!]!
   me: User!
 }
