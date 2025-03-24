@@ -1,15 +1,32 @@
 import { PrismaService } from 'nestjs-prisma';
-import { Injectable, BadRequestException } from '@nestjs/common';
+import {
+  Injectable,
+  BadRequestException,
+  NotFoundException,
+} from '@nestjs/common';
 import { PasswordService } from '../auth/password.service';
 import { ChangePasswordInput } from './dto/change-password.input';
 import { UpdateUserInput } from './dto/update-user.input';
+import { UsersRepository } from './users.repository';
+import { EXCEPTIONS } from '../common/constants/exceptions.constant';
 
 @Injectable()
 export class UsersService {
   constructor(
     private prisma: PrismaService,
     private passwordService: PasswordService,
+    private usersRepository: UsersRepository,
   ) {}
+
+  public async findById(id: string) {
+    const user = await this.usersRepository.findById({ where: { id } });
+
+    if (!user) {
+      throw new NotFoundException(EXCEPTIONS.USER.NOT_FOUND);
+    }
+
+    return user;
+  }
 
   updateUser(userId: string, newUserData: UpdateUserInput) {
     return this.prisma.user.update({

@@ -15,7 +15,7 @@ const config: Config = {
     path: 'api',
   },
   graphql: {
-    playgroundEnabled: true,
+    playgroundEnabled: false,
     debug: true,
     schemaDestination: './src/schema.graphql',
     sortSchema: true,

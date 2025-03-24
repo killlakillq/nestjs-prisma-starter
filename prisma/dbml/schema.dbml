@@ -11,6 +11,7 @@ Table User {
   firstname String
   lastname String
   posts Post [not null]
+  likes Like [not null]
   role Role [not null]
 }
 
@@ -23,6 +24,20 @@ Table Post {
   content String
   author User
   authorId String
+  likes Like [not null]
+}
+
+Table Like {
+  id String [pk]
+  createdAt DateTime [default: `now()`, not null]
+  user User [not null]
+  userId String [not null]
+  post Post [not null]
+  postId String [not null]
+
+  indexes {
+    (userId, postId) [unique]
+  }
 }
 
 Enum Role {
@@ -31,3 +46,7 @@ Enum Role {
 }
 
 Ref: Post.authorId > User.id
+
+Ref: Like.userId > User.id
+
+Ref: Like.postId > Post.id
