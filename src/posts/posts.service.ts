@@ -96,8 +96,6 @@ export class PostsService {
       post.id,
     );
 
-    console.log(likesCount);
-
     return likesCount;
   }
 }
