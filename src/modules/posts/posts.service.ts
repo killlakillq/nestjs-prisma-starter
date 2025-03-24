@@ -5,7 +5,7 @@ import {
 } from '@nestjs/common';
 import { PostsLikesRepository } from './repositories/posts-likes.repository';
 import { PostsRepository } from './repositories/posts.repository';
-import { EXCEPTIONS } from '../common/constants/exceptions.constant';
+import { EXCEPTIONS } from '../../common/constants/exceptions.constant';
 import { UsersService } from '../users/users.service';
 import { CreatePostInput } from './dto/createPost.input';
 

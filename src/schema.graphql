@@ -2,20 +2,6 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
 # ------------------------------------------------------
 
-type Auth {
-  """JWT access token"""
-  accessToken: JWT!
-
-  """JWT refresh token"""
-  refreshToken: JWT!
-  user: User!
-}
-
-input ChangePasswordInput {
-  newPassword: String!
-  oldPassword: String!
-}
-
 input CreatePostInput {
   content: String!
   title: String!
@@ -25,11 +11,6 @@ input CreatePostInput {
 A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format.
 """
 scalar DateTime
-
-"""
-A field whose value is a JSON Web Token (JWT): https://jwt.io/introduction.
-"""
-scalar JWT
 
 type Like {
   """Identifies the date and time when the object was created."""
@@ -44,20 +25,10 @@ type Like {
   userId: String!
 }
 
-input LoginInput {
-  email: String!
-  password: String!
-}
-
 type Mutation {
-  changePassword(data: ChangePasswordInput!): User!
   createPost(data: CreatePostInput!): Post!
   likePost(postId: String!, userId: String!): Like!
-  login(data: LoginInput!): Auth!
-  refreshToken(token: JWT!): Token!
-  signup(data: SignupInput!): Auth!
   unlikePost(postId: String!, userId: String!): Like!
-  updateUser(data: UpdateUserInput!): User!
 }
 
 type Post {
@@ -81,33 +52,12 @@ type Query {
   getPostLikes(postId: String!): [Like!]!
   getPostLikesCount(postId: String!): Int!
   getUserLikes(userId: String!): [Like!]!
-  me: User!
 }
 
 """User role"""
 enum Role {
   ADMIN
   USER
-}
-
-input SignupInput {
-  email: String!
-  firstname: String
-  lastname: String
-  password: String!
-}
-
-type Token {
-  """JWT access token"""
-  accessToken: JWT!
-
-  """JWT refresh token"""
-  refreshToken: JWT!
-}
-
-input UpdateUserInput {
-  firstname: String
-  lastname: String
 }
 
 type User {
